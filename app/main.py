@@ -1,5 +1,6 @@
-from fastapi import FastAPI, Form, Request, Depends
+from fastapi import FastAPI, Form, Request, Depends, status
 from typing import Union
+from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from . import models
 from .database import engine, get_db
@@ -28,3 +29,6 @@ def add(request: Request, title: str = Form(...) ,db: Session = Depends(get_db))
     new_todo = models.ToDo(title=title)
     db.add(new_todo)
     db.commit()
+    url = app.url_path_for("home")
+    return RedirectResponse(redirect_url=url, status_code = status.HTTP_303_SEE_OTHER)
+
