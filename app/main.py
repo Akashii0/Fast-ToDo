@@ -1,6 +1,11 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Form, Request, Depends
 from typing import Union
 from fastapi.templating import Jinja2Templates
+from . import models
+from .database import engine, get_db
+from sqlalchemy.orm import Session
+
+models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
@@ -18,3 +23,8 @@ templates = Jinja2Templates(directory="templates")
 def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
+@app.post('/add')
+def add(request: Request, title: str = Form(...) ,db: Session = Depends(get_db)):
+    new_todo = models.ToDo(title=title)
+    db.add(new_todo)
+    db.commit()
