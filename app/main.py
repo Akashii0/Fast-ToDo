@@ -10,25 +10,36 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-# @app.get('/')
-# def read_root():
-#     return {"Message":"Hello World."}
-
-# @app.get('items/{item_id}')
-# def getItems(item_id: int, q: Union[str, None] = None):
-#     return {"item_id": item_id, "q": q}
-
 templates = Jinja2Templates(directory="templates")
 
 @app.get('/')
-def index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+def index(request: Request, db: Session = Depends(get_db)):
+    todos = db.query(models.ToDo).all()
+    return templates.TemplateResponse("index.html",
+                                      {"request": request, "todo_list": todos})
 
 @app.post('/add')
-def add(request: Request, title: str = Form(...) ,db: Session = Depends(get_db)):
+def add(request: Request, title: str = Form(...), db: Session = Depends(get_db)):
     new_todo = models.ToDo(title=title)
     db.add(new_todo)
     db.commit()
-    url = app.url_path_for("home")
-    return RedirectResponse(redirect_url=url, status_code = status.HTTP_303_SEE_OTHER)
+    url = app.url_path_for("")
+    return RedirectResponse(url=url, status_code = status.HTTP_303_SEE_OTHER)
 
+@app.get('/update/{todo_id}')
+def update(request: Request, todo_id: int, db: Session = Depends(get_db)):
+    todo = db.query(models.ToDo).filter(models.ToDo.id == todo_id).first()
+    todo.status = not todo.status
+    db.commit()
+    
+    url = app.url_path_for("")
+    return RedirectResponse(url=url, status_code = status.HTTP_302_FOUND)
+    
+@app.get("/delete/{todo_id}")
+def delete(request: Request, todo_id: int, db: Session = Depends(get_db)):
+    todo = db.query(models.ToDo).filter(models.ToDo.id == todo_id).first()
+    db.delete(todo)
+    db.commit()
+    
+    url = app.url_path_for("")
+    return RedirectResponse(url=url, status_code=status.HTTP_302_FOUND)

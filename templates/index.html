@@ -42,7 +42,7 @@
                       <th scope="row">{{todo.id }}</th>
                       <td>{{ todo.title }}</td>
                       <td>
-                        {% if todo.complete == False %}
+                        {% if todo.status == False %}
                         <div class="alert alert-secondary" role="alert">In progress</div>
                         {% else %}
                         <div class="alert alert-success" role="alert">Completed</div>
