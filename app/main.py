@@ -13,7 +13,7 @@ app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
 @app.get('/')
-def index(request: Request, db: Session = Depends(get_db)):
+async def index(request: Request, db: Session = Depends(get_db)):
     todos = db.query(models.ToDo).all()
     return templates.TemplateResponse("index.html",
                                       {"request": request, "todo_list": todos})
