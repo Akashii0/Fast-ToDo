@@ -1,5 +1,37 @@
-.btn {
-    color: violet;
+.body {
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+
+.btn-success {
+    background: #00bbf0;
+    border: #00bbf0; 
+}
+.btn-success:hover {
+    background: #8594e4;
+    border: #8594e4; 
 }
 
 
+.card {
+    background: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+}
+
+.col-lg-9 {
+    color: #a6b1e1;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+
+}
+
+.btn-primary {
+    background: #6643b5;
+    border: #6643b5;
+}
+.btn-primary:hover {
+    background: #430f58;
+    border: #430f58;
+}
+
+.table {
+    color: #d5def5;
+
+}
