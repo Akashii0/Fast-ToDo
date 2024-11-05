@@ -41,7 +41,7 @@
                     {% for todo in todo_list %}
                     <tr>
                       <th scope="row">{{todo.id }}</th>
-                      <td>{{ todo.title }}</td>
+                      <td>{{ todo.content }}</td>
                       <td>
                         {% if todo.status == False %}
                         <div class="alert alert-secondary" role="alert">In progress</div>
