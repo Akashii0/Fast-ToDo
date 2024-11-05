@@ -7,7 +7,7 @@ class ToDo(Base):
     __tablename__ = "ToDos"
     
     id = Column(Integer, primary_key=True, nullable=False)
-    title = Column(String, index=True)
+    content = Column(String, index=True)
     status = Column(Boolean, default=False)
     created_at = Column(TIMESTAMP(timezone=True), nullable=False,
                         server_default=text('now()'))
