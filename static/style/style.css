@@ -1,14 +1,7 @@
-.body {
-    overflow: auto;
-    height: 100%;
-    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
-    background: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
-}
-
-.html {
-    overflow: hidden;
-    height: 100%;
-}
+body {
+    overflow-x: hidden;
+    background: #424874;
+} 
 
 .btn-success {
     background: #00bbf0;
@@ -21,6 +14,11 @@
 
 
 .card {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
     background: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
 }
 
