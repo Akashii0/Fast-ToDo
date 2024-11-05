@@ -2,6 +2,7 @@ from fastapi import FastAPI, Form, Request, Depends, status
 from typing import Union
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 from . import models
 from .database import engine, get_db
 from sqlalchemy.orm import Session
@@ -9,6 +10,8 @@ from sqlalchemy.orm import Session
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+app.mount('/static', StaticFiles(directory='static', html=True), name="static")
+
 
 templates = Jinja2Templates(directory="templates")
 
@@ -23,8 +26,8 @@ def add(request: Request, title: str = Form(...), db: Session = Depends(get_db))
     new_todo = models.ToDo(title=title)
     db.add(new_todo)
     db.commit()
-    url = app.url_path_for("")
-    return RedirectResponse(url=url, status_code = status.HTTP_303_SEE_OTHER)
+    # url = app.url_path_for('/')
+    return RedirectResponse(url='/', status_code = status.HTTP_303_SEE_OTHER)
 
 @app.get('/update/{todo_id}')
 def update(request: Request, todo_id: int, db: Session = Depends(get_db)):
@@ -32,8 +35,8 @@ def update(request: Request, todo_id: int, db: Session = Depends(get_db)):
     todo.status = not todo.status
     db.commit()
     
-    url = app.url_path_for("")
-    return RedirectResponse(url=url, status_code = status.HTTP_302_FOUND)
+    # url = app.url_path_for('/')
+    return RedirectResponse(url='/', status_code = status.HTTP_302_FOUND)
     
 @app.get("/delete/{todo_id}")
 def delete(request: Request, todo_id: int, db: Session = Depends(get_db)):
@@ -41,5 +44,5 @@ def delete(request: Request, todo_id: int, db: Session = Depends(get_db)):
     db.delete(todo)
     db.commit()
     
-    url = app.url_path_for("")
-    return RedirectResponse(url=url, status_code=status.HTTP_302_FOUND)
+    # url = app.url_path_for('/')
+    return RedirectResponse(url='/', status_code=status.HTTP_302_FOUND)
