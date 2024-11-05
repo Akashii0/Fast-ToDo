@@ -23,7 +23,7 @@ async def index(request: Request, db: Session = Depends(get_db)):
 
 @app.post('/add')
 def add(request: Request, title: str = Form(...), db: Session = Depends(get_db)):
-    new_todo = models.ToDo(title=title)
+    new_todo = models.ToDo(content=title)
     db.add(new_todo)
     db.commit()
     # url = app.url_path_for('/')
