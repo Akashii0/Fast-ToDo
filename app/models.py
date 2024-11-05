@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.sql.sqltypes import TIMESTAMP
 from sqlalchemy.sql.expression import text
-from .database import Base
+from database import Base
 
 class ToDo(Base):
     __tablename__ = "ToDos"
