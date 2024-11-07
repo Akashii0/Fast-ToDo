@@ -8,7 +8,6 @@ from ..database import engine, get_db
 from sqlalchemy.orm import Session
 
 router = APIRouter(
-    prefix="/todo",
     tags=['ToDos']
 )
 router.mount('/static', StaticFiles(directory='static', html=True), name="static")
