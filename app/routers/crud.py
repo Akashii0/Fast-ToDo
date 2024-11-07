@@ -15,7 +15,7 @@ router.mount('/static', StaticFiles(directory='static', html=True), name="static
 templates = Jinja2Templates(directory="templates")
 
 
-@router.get('/')
+@router.get('/todo')
 async def index(request: Request, db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
     todos = db.query(models.ToDo).filter(models.ToDo.owner_id == current_user.id).all()
     
@@ -33,7 +33,7 @@ def add(request: Request, title: str = Form(...), db: Session = Depends(get_db),
     db.commit()
     db.refresh(new_todo)
 
-    return RedirectResponse(url='/', status_code = status.HTTP_303_SEE_OTHER)
+    return RedirectResponse(url='/todo', status_code = status.HTTP_303_SEE_OTHER)
 
 @router.get('/update/{todo_id}')
 def update(request: Request, todo_id: int, db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
