@@ -1,6 +1,6 @@
 from typing import Any, Dict
 
-from fastapi import APIRouter, Depends, Form, status
+from fastapi import APIRouter, Depends, Form, Request, status
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 
@@ -14,6 +14,7 @@ router = APIRouter(prefix="/users", tags=["Users"])
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 def create_user(
+    request: Request,
     db: Session = Depends(get_db),
     username: str = Form(),
     password: str = Form(),
@@ -30,7 +31,8 @@ def create_user(
     db.refresh(new_user)
 
     print(new_user)
-    return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
+    # return RedirectResponse(url="/login")
+    return {"message": "Created Account Successfully."}
 
 
 def get_user(self):
