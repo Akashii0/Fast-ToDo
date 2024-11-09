@@ -14,6 +14,10 @@ router.mount('/static', StaticFiles(directory='static', html=True), name="static
 
 templates = Jinja2Templates(directory="templates")
 
+@router.get('/')
+def index(request:Request):
+    return templates.TemplateResponse("login.html",
+                                      {"request": request})
 
 @router.get('/todo')
 async def index(request: Request, db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
