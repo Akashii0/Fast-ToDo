@@ -31,8 +31,7 @@ def create_user(
     db.refresh(new_user)
 
     print(new_user)
-    # return RedirectResponse(url="/login")
-    return {"message": "Created Account Successfully."}
+    return RedirectResponse(url="/login")
 
 
 def get_user(self):
