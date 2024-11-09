@@ -9,10 +9,10 @@ from app.models import User
 from .. import models, schemas, utils
 from ..database import get_db
 
-router = APIRouter(prefix="/users", tags=["Users"])
+router = APIRouter(tags=["Users"])
 
 
-@router.post("/", status_code=status.HTTP_201_CREATED)
+@router.post("/users")
 def create_user(
     request: Request,
     db: Session = Depends(get_db),
