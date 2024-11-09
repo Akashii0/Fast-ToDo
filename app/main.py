@@ -12,7 +12,7 @@ from .routers import crud, auth, user
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
-# app.mount('/static', StaticFiles(directory='static', html=True), name="static")
+app.mount('/static', StaticFiles(directory='static', html=True), name="static")
 
 
 templates = Jinja2Templates(directory="templates")
