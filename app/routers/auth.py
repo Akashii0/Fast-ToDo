@@ -18,9 +18,9 @@ router = APIRouter(tags=["Authentication"])
 router.mount("/static", StaticFiles(directory="static", html=True), name="static")
 
 
-@router.get("/login")
-def showlogin(request: Request):
-    return templates.TemplateResponse("login.html", {"request": request})
+# @router.get("/login")
+# def showlogin(request: Request):
+#     return templates.TemplateResponse("login.html", {"request": request})
 
 
 @router.post("/login", response_model=schemas.Token)
