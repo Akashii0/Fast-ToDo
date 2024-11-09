@@ -30,7 +30,7 @@ def create_user(
     db.refresh(new_user)
 
     print(new_user)
-    return RedirectResponse(url="/login", status_code=status.HTTP_307_TEMPORARY_REDIRECT)
+    return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
 
 def get_user(self):
