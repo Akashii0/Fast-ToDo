@@ -1,6 +1,6 @@
 from typing import Any, Dict
 
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, Form, status
 from sqlalchemy.orm import Session
 
 from app.models import User
@@ -12,14 +12,20 @@ router = APIRouter(prefix="/users", tags=["Users"])
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.UserOut)
-def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
+def create_user(
+    user: schemas.UserCreate,
+    db: Session = Depends(get_db),
+    username: str = Form(),
+    password: str = Form(),
+):
     # Hash the password - user.password
 
     # hashed_password = pwd_context.hash(user.password)
-    hashed_password = utils.hash(user.password)
-    user.password = hashed_password
+    hashed_password = utils.hash(password)
+    password = hashed_password
 
-    new_user = models.User(**user.dict())
+    new_user = models.User(**user.model_dump(username=username, password=password))
+    # new_user = User(username=username, password=password)
     db.add(new_user)
     db.commit()
     db.refresh(new_user)

@@ -7,8 +7,8 @@ from pydantic import BaseModel
 
 
 class UserCreate(BaseModel):
-    username: str
-    password: str
+    username: str = Form()
+    password: str = Form()
 
 
 class UserOut(BaseModel):

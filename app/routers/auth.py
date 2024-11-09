@@ -4,7 +4,6 @@ from fastapi import (
     Form,
     HTTPException,
     Request,
-    Response,
     status,
 )
 from fastapi.responses import RedirectResponse
