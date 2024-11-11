@@ -62,7 +62,7 @@ Intuitive and responsive design for a smooth user experience
 
 **Backend:** FastAPI (Python)
 **Frontend:** HTML, CSS
-**Database:** SQLite (default) or any other FastAPI-compatible database
+**Database:** PostgreSQL (default) or any other FastAPI-compatible database
 **Authentication:** Secure login/signup flow using JWT tokens
 **Deployment:** Deployed on https://todo.a.7o7.cx for public access, with proper version control using Git.
 
@@ -70,10 +70,10 @@ Intuitive and responsive design for a smooth user experience
 This app uses a PostgreSQL database by default. You can change the database settings in main.py to use other databases like MySQL. The database stores both user credentials and task data.
 
 ### API Endpoints
-Authentication:
+**Authentication:**
 POST /auth/login: Authenticate a user and issue a JWT.
 POST /auth/signup: Register a new user.
-Tasks:
+**Tasks:**
 GET /tasks: Retrieve all tasks for the authenticated user.
 POST /tasks: Create a new task.
 PUT /tasks/{id}: Update an existing task by ID.
