@@ -33,9 +33,9 @@ I developed a simple and secure ToDo application featuring a FastAPI backend wit
 
 ### Key features
 
-**CRUD**Add, update, delete, and view tasks
-**User Authentication:** Login page with secure password handling
-**Database Integration** to persist user and task data
+- **CRUD**Add, update, delete, and view tasks
+- **User Authentication:** Login page with secure password handling
+- **Database Integration** to persist user and task data
 Intuitive and responsive design for a smooth user experience
 
 
@@ -59,30 +59,34 @@ Intuitive and responsive design for a smooth user experience
 
 
 ### Technologies Used:
+- **Backend:** FastAPI (Python)
 
-**Backend:** FastAPI (Python)
-**Frontend:** HTML, CSS
-**Database:** PostgreSQL (default) or any other FastAPI-compatible database
-**Authentication:** Secure login/signup flow using JWT tokens
-**Deployment:** Deployed on https://todo.a.7o7.cx for public access, with proper version control using Git.
+- **Frontend:** HTML, CSS
+
+- **Database:** PostgreSQL (default) or any other FastAPI-compatible database
+
+- **Authentication:** Secure login/signup flow using JWT tokens
+
+- **Deployment:** Deployed on https://todo.a.7o7.cx for public access, with proper version control using Git.
 
 ### Database Setup
 This app uses a PostgreSQL database by default. You can change the database settings in main.py to use other databases like MySQL. The database stores both user credentials and task data.
 
 ### API Endpoints
-**Authentication:**
+- **Authentication:**
 POST /auth/login: Authenticate a user and issue a JWT.
 POST /auth/signup: Register a new user.
-**Tasks:**
+
+- **Tasks:**
 GET /tasks: Retrieve all tasks for the authenticated user.
 POST /tasks: Create a new task.
 PUT /tasks/{id}: Update an existing task by ID.
 DELETE /tasks/{id}: Delete a task by ID.
 
 ### Usage
-**User Registration:** Register a new account on the login page.
-**Login:** Log in with your registered credentials.
-**Manage Tasks:** Add, update status of todo, or delete tasks associated with your account.
+- **User Registration:** Register a new account on the login page.
+- **Login:** Log in with your registered credentials.
+- **Manage Tasks:** Add, update status of todo, or delete tasks associated with your account.
 
 ### Security
 JWT Authentication: Protects user sessions with JSON Web Tokens.
